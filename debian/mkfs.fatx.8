@@ -1,0 +1,188 @@
+.\" -*- nroff -*-
+.\" Copyright 2013, 2014 by Christophe Duverger.  All Rights Reserved.
+.\" This file may be copied under the terms of the GNU Public License.
+.\" 
+.TH MKFS.FATX 8 "January  2014"
+.SH NAME
+mkfs.fatx \- creates an Xbox fatx file system
+.SH SYNOPSIS
+.B mkfs.fatx
+[
+.B \-antvy
+]
+[
+.B \-\-offset
+.I offset
+]
+[
+.B \-\-size
+.I size
+]
+[
+.B \-p | \-\-partition sc|gc|cp|x1|x2
+]
+[
+.B \-l | \-\-table mu|file|hd|kit|usb
+]
+[
+.B \-l | \-\-label
+.I label
+]
+[
+.B \-c | \-\-cls\-size
+.I cls\-size
+]
+[
+.B \-i | \-\-input
+]
+.I device
+.SH DESCRIPTION
+.B mkfs.fatx
+creates a fatx file system on the specified
+.I device
+.PP
+.I device
+is the device file where the file system shall be created (e.g. /dev/hdXX).
+.PP
+If the
+.I device
+is containing an existing partition table,
+.B mkfs.fatx
+uses it to determine where to create the file system.
+In other case,
+.B mkfs.fatx
+consider
+.I device
+to be a partition file without any partition table, so uses all the space for the file system.
+.PP
+If the
+.B \-\-cls\-size
+option is not used, default values are taken for the number of blocks per cluster.
+.SH OPTIONS
+.TP
+.B \-a, \-\-auto
+Give the default answer to all questions. Allows 
+.B mkfs.fatx
+to be used non-interactively.
+.TP
+.B \-c, \-\-cls\-size cls\-size
+Set the number of blocks per cluster to
+.I cls\-size
+.TP
+.B \-h, \-\-help
+Print summary of options and exit.
+.TP
+.B \-i, \-\-input device
+Set the
+.I device
+file where the file system shall be created.
+.TP
+.B \-l, \-\-label label
+Set the file system name to
+.I label
+.TP
+.B \-n, \-\-none
+Assume an answer of ``no'' to all questions. Allows 
+.B mkfs.fatx
+to be used non-interactively.
+.TP
+.B \-p, \-\-partition sc|gc|cp|x1|x2
+Choose the partition to create, depending on the device. By default, xbox 2 partition is selected.
+.br
+.B sc
+\	to select system cache partition
+.br
+.B gc
+\	to select game cache partition
+.br
+.B cp
+\	to select content cache partition
+.br
+.B x1
+\	to select xbox 1 partition
+.br
+.B x2
+\	to select xbox 2 partition
+.TP
+.B \-l, \-\-table mu|file|hd|kit|usb
+Create a partition table on the device. By default, when this option is not specified, the partition table will not be touched.
+.br
+.B mu
+\     to create a Memory Unit partition table
+.br
+.B file
+\   to create the partition on a plain file : all device, with no partition table
+.br
+.B hd
+\     to create a XBOX360 hard drive partition table
+.br
+.B kit
+\    to create a DevKit hard drive partition table
+.br
+.B usb
+\    to create a USB Drive partition table
+.TP
+.B \-t, \-\-test
+Open the file system read-only.
+.TP
+.B \-v, \-\-verbose
+Verbose mode.
+.TP
+.B \-y, \-\-all
+Assume an answer of ``yes'' to all questions. Allows 
+.B mkfs.fatx
+to be used non-interactively.
+.TP
+.B \-\-offset offset
+Force
+.I offset
+of the partition to be checked in the device. This option disables the identification of partition mapping of the device.
+.TP
+.B \-\-size size
+Force
+.I size
+of the partition to be checked in the device. This option disables the identification of partition mapping of the device.
+.TP
+.B --version
+Print version information and exit.
+.SH EXIT CODE
+The exit code returned by
+.B mkfs.fatx
+is the sum of the following conditions:
+.br
+0\	no error
+.br
+8\	operational error
+.br
+16\	usage or syntax error
+.SH REPORTING BUGS
+If you manage to find a file system which causes 
+.B mkfs.fatx
+to crash, or which
+.B mkfs.fatx
+is unable to create, please report it to the author.
+.PP
+Please include as much information as possible in your bug report.
+Ideally, include a complete transcript of the
+.B mkfs.fatx
+run, so I can see exactly what error messages are displayed.  If you
+have a writeable file system where the transcript can be stored, the 
+.BR script (1)
+program is a handy way to save the output of
+.B mkfs.fatx
+to a file.
+.PP
+Always include the full version string which 
+.B mkfs.fatx
+displays when it is run with
+.B \-\-version
+option, so I know which version you are running.
+.SH AUTHOR
+This version of
+.B mkfs.fatx
+is written by Christophe DUVERGER <baxter@about.org>.
+.SH SEE ALSO
+.BR label.fatx (8),
+.BR fsck.fatx (8),
+.BR unrm.fatx (8),
+.BR fusefatx (8)
