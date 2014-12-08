@@ -3443,7 +3443,7 @@ static int					fatx_create		(const char* path, mode_t mode) {
 	size_t l = p.find_last_of(sepdir);
 	if(l == string::npos || l == p.length() - 1)
 		return -ENOENT;
-	if(l > name_size)
+	if(p.length() - l > name_size)
 		return -ENAMETOOLONG;
 	if(fatx_context::get()->root->find(path) != nullptr)
 		return -EEXIST;
