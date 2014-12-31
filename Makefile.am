@@ -65,7 +65,7 @@ XBOXLDADD = -lopenxdk -lhal -lc -lusb -lhal -lc -lxboxkrnl -lstdc++
 
 fsck_SOURCES = fsck.cpp fatx.cpp fatx.hpp config.h Makefile.am
 fsck_CPPFLAGS = $(AM_CPPFLAGS) $(XBOXCPPFLAGS) -D XBOX_FSCK
-fsck_LDFLAGS = $(XBOXLDFLAGS)
+fsck_LDFLAGS = $(XBOXLDFLAGS) -pthread
 fsck_LDADD = $(XBOXLDADD)
 fsck_LINK = $(MINGW32CPP) -o $@ $(XBOXLDFLAGS)
 
