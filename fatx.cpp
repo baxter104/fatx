@@ -16,6 +16,9 @@
  *  along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <sys/types.h>
+#include <pwd.h>
+
 #include "fatx.hpp"
 
 const char*		sepdir		= "/";				/// using unix directories
@@ -26,6 +29,41 @@ const char*		def_fpre	= "FILE";			/// default file prefix for lost & founds
 const char*		def_label	= "XBOX";			/// default label name
 
 fatx_context*	fatx_context::	fatxc = nullptr;
+
+string get_current_username() {
+    struct passwd *pw = getpwuid(geteuid());
+
+    return string(pw->pw_name);
+}
+
+// Set real and effective user and group to 'username'. Return false on error.
+bool drop_privileges(string username) {
+    struct passwd *pw = getpwnam(username.c_str());
+
+    // set the real and effective UIDs and GIDs
+    if(setregid(pw->pw_gid, pw->pw_gid))
+    {
+        perror("setreuid");
+        return false;
+    }
+    if(setreuid(pw->pw_uid, pw->pw_uid))
+    {
+        printf("dropping guid to %d\n", pw->pw_gid);
+        string err_str = "Error dropping privileges";
+#if defined DEBUG && defined DBG_CACHE
+        err_str += ": ";
+        err_str += strerror(errno);
+        dbglog(err_str);
+#else // defined DEBUG && defined DBG_CACHE
+        perror(err_str.c_str());
+#endif // defined DEBUG && defined DBG_CACHE
+        return false;
+    }
+
+    cout << "Successfully dropped privileges to " << username << endl;
+
+    return true;
+}
 
 template<typename key_t, typename value_t>
 												read_cache<key_t, value_t>::	read_cache(const fread_t& r, const fwrite_t& w, size_t c, size_t a) :
@@ -441,6 +479,8 @@ pair<bool, bool>			console::		read() {
 bool						fatx_context::	setup() {
 	if(!dev.setup())
 		return false;
+    if(mmi.runas.length() > 0 && !drop_privileges(mmi.runas))
+        return false;
 	if(!par.setup())
 		return false;
 	if(mmi.prog == frontend::fsck || mmi.prog == frontend::unrm || (mmi.prog == frontend::fuse && mmi.recover))
@@ -481,7 +521,7 @@ void						fatx_context::	destroy() {
 		#else
 			0
 		#endif
-	), allyes(true), offset(0), size(0), input(), script() {
+	), allyes(true), offset(0), size(0), input(), script(), runas("") {
 }
 bool						frontend::		getanswer(bool def) {
 	bool res = false;
@@ -652,6 +692,7 @@ bool						frontend::		setup() {
 			("uid",  value<uid_t>(), "sets uid of the filesystem")
 			("gid",  value<gid_t>(), "sets gid of the filesystem")
 			("mask",  value<string>(), "sets mask for entries modes")
+            ("runas", value<string>(), "drop privileges after opening input device")
 		;
 	}
 	if(prog == label || prog == mkfs) {
@@ -804,6 +845,8 @@ bool						frontend::		setup() {
 		size			= varmap["size"].as<streamptr>();
 	if(varmap.count("input"))
 		input			= varmap["input"].as<string>();
+    if(varmap.count("runas"))
+        runas           = varmap["runas"].as<string>();
 	if(prog == label)
 		readonly		= !varmap.count("label");
 	if(varmap.count("option")) {

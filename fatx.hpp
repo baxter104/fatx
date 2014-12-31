@@ -188,6 +188,10 @@ extern const char*			def_landf;								/// default directory for lost & founds
 extern const char*			def_fpre;								/// default file prefix for lost & founds
 extern const char*			def_label;								/// default label name
 
+
+
+bool                        drop_privileges(string user);                      /// drop privileges if running as root
+
 /// Macro for debug output
 ///
 #ifdef DEBUG
@@ -720,6 +724,7 @@ public:
 	streamptr					size;
 	string						input;
 	string						script;
+    string                      runas;
 
 								frontend(int, const char* const * const);
 								~frontend();
