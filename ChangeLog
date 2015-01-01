@@ -1,0 +1,56 @@
+fatx (1.7-1) STABLE; urgency=low
+
+  file name too long error management
+  option partition taken into account
+  mkfs.fatx can now create different kinds of partition tables
+
+ -- Christophe DUVERGER <baxter@about.org>  Thu, 25 Sep 2014 17:39:44 +0100
+
+fatx (1.6-1) STABLE; urgency=low
+
+  bad file descriptor error when path contains 2 identical names fixed
+  name.txt rename not allowed
+
+ -- Christophe DUVERGER <baxter@about.org>  Tue, 26 Aug 2014 11:36:24 +0100
+
+fatx (1.5-1) stable; urgency=low
+
+  file concurrent access
+
+ -- Christophe DUVERGER <baxter@about.org>  Sat, 26 Jul 2014 22:38:34 +0100
+
+fatx (1.4-1) unstable; urgency=low
+
+  memory leaks fixed
+  move (rename) fixed
+  truncate fixed
+  lost chains taken into account for unrm
+  random segfault during file operations
+  and other insidious bugs (like some file copy errors)
+
+ -- Christophe DUVERGER <baxter@about.org>  Sun, 11 May 2014 21:41:56 +0100
+
+fatx (1.3-1) unstable; urgency=low
+
+  Few bugs fixed
+
+ -- Christophe DUVERGER <baxter@about.org>  Mon, 10 Feb 2014 08:40:27 +0100
+
+fatx (1.2-1) unstable; urgency=low
+
+  Many bugs fixed (but less than previous version)
+  Add of manpages
+
+ -- Christophe DUVERGER <baxter@about.org>  Tue, 28 Jan 2014 18:16:19 +0100
+
+fatx (1.1-1) unstable; urgency=low
+
+  Many bugs fixed
+
+ -- Christophe DUVERGER <baxter@about.org>  Sat, 04 Jan 2014 13:44:17 +0100
+
+fatx (1.0-1) unstable; urgency=low
+
+  Initial release
+
+ -- Christophe DUVERGER <baxter@about.org>  Fri, 05 Apr 2013 19:22:39 +0200

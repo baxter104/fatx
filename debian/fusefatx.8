@@ -1,0 +1,212 @@
+.\" -*- nroff -*-
+.\" Copyright 2013, 2014 by Christophe Duverger.  All Rights Reserved.
+.\" This file may be copied under the terms of the GNU Public License.
+.\" 
+.TH FUSEFATX 8 "January  2014"
+.SH NAME
+fusefatx \- mounts an Xbox fatx file system
+.SH SYNOPSIS
+.B fusefatx
+[
+.B \-dfsrtv
+]
+[
+.B \-\-nodate
+]
+[
+.B \-\-nolost
+]
+[
+.B \-\-uid
+.I uid
+]
+[
+.B \-\-gid
+.I gid
+]
+[
+.B \-\-mask
+.I mask
+]
+[
+.B \-o | \-\-option
+.I options
+]
+[
+.B \-\-offset
+.I offset
+]
+[
+.B \-\-size
+.I size
+]
+[
+.B \-p | \-\-partition sc|gc|cp|x1|x2
+]
+[
+.B \-i | \-\-input
+]
+.I device
+[
+.B \-m | \-\-mount
+]
+.I mountpoint
+.SH DESCRIPTION
+.B fusefatx
+mounts a fatx file system.
+.PP
+.I device
+is the device file where the file system is stored (e.g. /dev/hdXX).
+.PP
+.B fusefatx
+uses FUSE (file system in user space) to mount the file system. The
+.B \-\-option
+option can pass
+.I options
+directly to FUSE.
+.PP
+If the
+.B \-\-recover
+option is used, the program first analyses the file system to find deleted files and then mounts the file system in read only mode (implies
+.B \-t
+option) with deleted files and directories visible.
+.SH OPTIONS
+.TP
+.B \-d, \-\-debug
+This option enables FUSE to print debug information on the terminal. This option implies the
+.B \-f
+option.
+.TP
+.B \-f, \-\-foregrd
+This option enables the FUSE process not to be detached from the terminal.
+.TP
+.B \-h, \-\-help
+Print summary of options and exit.
+.TP
+.B \-i, \-\-input device
+Set the
+.I device
+file where the file system is.
+.TP
+.B \-m, \-\-mount mountpoint
+Set the
+.I mountpoint
+directory to be used as the root of the file system.
+.TP
+.B \-o, \-\-option options
+Define the
+.I options
+to be passed to FUSE. See
+.I fuse(8)
+manpage for more details.
+.TP
+.B \-p, \-\-partition sc|gc|cp|x1|x2
+Choose the partition to be checked, depending on the device. By default, xbox 2 partition is selected.
+.br
+.B sc
+\	to select system cache partition
+.br
+.B gc
+\	to select game cache partition
+.br
+.B cp
+\	to select content cache partition
+.br
+.B x1
+\	to select xbox 1 partition
+.br
+.B x2
+\	to select xbox 2 partition
+.TP
+.B \-r, \-\-recover
+Mount the file system with the deleted files visible. This option implies the
+.B \-t
+option: the file system is opened read only.
+.TP
+.B \-s, \-\-singlethr
+This option tells FUSE not to use multiple threads for file system operations.
+.TP
+.B \-t, \-\-test
+Open the file system read-only.
+.TP
+.B \-v, \-\-verbose
+Verbose mode.
+.TP
+.B \-\-gid gid
+Set the group id of the files mounted.
+.TP
+.B \-\-mask mask
+Set the permission mask of the files mounted.
+.I mask
+must be in octal format.
+.TP
+.B \-\-nodate
+Disable dates precedence of deleted files in the recovery algorithm. This option is only valid in conjunction with the
+.B \-r
+option.
+.TP
+.B \-\-nolost
+Disable preservation of lost chains in the recovery algorithm. This option is only valid in conjunction with the
+.B \-r
+option.
+.TP
+.B \-\-offset offset
+Force
+.I offset
+of the partition to be checked in the device. This option disables the identification of partition mapping of the device.
+.TP
+.B \-\-size size
+Force
+.I size
+of the partition to be checked in the device. This option disables the identification of partition mapping of the device.
+.TP
+.B \-\-uid uid
+Set the user id of the files mounted.
+.TP
+.B --version
+Print version information and exit.
+.SH EXIT CODE
+The exit code returned by
+.B fusefatx
+is the sum of the following conditions:
+.br
+0\	\	no error
+.br
+.I
+code
+\	FUSE error code in case of file system operation error or FUSE internal error
+.br
+8\	\	operational error
+.br
+16\	\	usage or syntax error
+.SH REPORTING BUGS
+If you manage to find a file system which causes 
+.B fusefatx
+to crash, or which
+.B fusefatx
+is unable to mount, please report it to the author.
+.PP
+Please include as much information as possible in your bug report.
+Ideally, include a complete transcript of the
+.B fusefatx
+run, so I can see exactly what error messages are displayed.  If you
+have a writeable file system where the transcript can be stored, the 
+.BR script (1)
+program is a handy way to save the output of
+.B fusefatx
+to a file.
+.PP
+Always include the full version string which 
+.B fusefatx
+displays when it is run with
+.B \-\-version
+option, so I know which version you are running.
+.SH AUTHOR
+This version of
+.B fusefatx
+is written by Christophe DUVERGER <baxter@about.org>.
+.SH SEE ALSO
+.BR mkfs.fatx (8),
+.BR label.fatx (8),
+.BR fsck.fatx (8),
+.BR unrm.fatx (8)

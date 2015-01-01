@@ -1,0 +1,4 @@
+- parallelize scan at start
+- ensure operations by transactions
+- add defrag.fatx
+- add resize.fatx

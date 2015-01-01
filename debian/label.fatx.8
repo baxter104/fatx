@@ -1,0 +1,129 @@
+.\" -*- nroff -*-
+.\" Copyright 2013, 2014 by Christophe Duverger.  All Rights Reserved.
+.\" This file may be copied under the terms of the GNU Public License.
+.\" 
+.TH LABEL.FATX 8 "January  2014"
+.SH NAME
+label.fatx \- manage an Xbox fatx file system volume name
+.SH SYNOPSIS
+.B label.fatx
+[
+.B \-v
+]
+[
+.B \-\-offset
+.I offset
+]
+[
+.B \-\-size
+.I size
+]
+[
+.B \-p | \-\-partition sc|gc|cp|x1|x2
+]
+[
+.B \-l | \-\-label
+.I label
+]
+[
+.B \-i | \-\-input
+]
+.I device
+.SH DESCRIPTION
+.B label.fatx
+prints or changes the name of a fatx file system.
+.PP
+.I device
+is the device file where the file system is stored (e.g. /dev/hdXX).
+.PP
+If the option
+.B \-\-label
+is not used, the program will print the current label of the file system.
+.SH OPTIONS
+.TP
+.B \-h, \-\-help
+Print summary of options and exit.
+.TP
+.B \-i, \-\-input device
+Set the
+.I device
+file where the file system is.
+.TP
+.B \-l, \-\-label label
+Change the file system name to
+.I label
+.TP
+.B \-p, \-\-partition sc|gc|cp|x1|x2
+Choose the partition to be checked, depending on the device. By default, xbox 2 partition is selected.
+.br
+.B sc
+\	to select system cache partition
+.br
+.B gc
+\	to select game cache partition
+.br
+.B cp
+\	to select content cache partition
+.br
+.B x1
+\	to select xbox 1 partition
+.br
+.B x2
+\	to select xbox 2 partition
+.TP
+.B \-v, \-\-verbose
+Verbose mode.
+.TP
+.B \-\-offset offset
+Force
+.I offset
+of the partition to be checked in the device. This option disables the identification of partition mapping of the device.
+.TP
+.B \-\-size size
+Force
+.I size
+of the partition to be checked in the device. This option disables the identification of partition mapping of the device.
+.TP
+.B --version
+Print version information and exit.
+.SH EXIT CODE
+The exit code returned by
+.B label.fatx
+is the sum of the following conditions:
+.br
+0\	no error
+.br
+8\	operational error
+.br
+16\	usage or syntax error
+.SH REPORTING BUGS
+If you manage to find a file system which causes 
+.B label.fatx
+to crash, or which
+.B label.fatx
+is unable to manage, please report it to the author.
+.PP
+Please include as much information as possible in your bug report.
+Ideally, include a complete transcript of the
+.B label.fatx
+run, so I can see exactly what error messages are displayed.  If you
+have a writeable file system where the transcript can be stored, the 
+.BR script (1)
+program is a handy way to save the output of
+.B label.fatx
+to a file.
+.PP
+Always include the full version string which 
+.B label.fatx
+displays when it is run with
+.B \-\-version
+option, so I know which version you are running.
+.SH AUTHOR
+This version of
+.B label.fatx
+is written by Christophe DUVERGER <baxter@about.org>.
+.SH SEE ALSO
+.BR mkfs.fatx (8),
+.BR fsck.fatx (8),
+.BR unrm.fatx (8),
+.BR fusefatx (8)
