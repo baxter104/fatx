@@ -639,7 +639,7 @@ fatx_CPPFLAGS = $(AM_CPPFLAGS) $(am__append_2) -D NO_SPLICE
 @xbe_TRUE@XBOXLDADD = -lopenxdk -lhal -lc -lusb -lhal -lc -lxboxkrnl -lstdc++
 @xbe_TRUE@fsck_SOURCES = fsck.cpp fatx.cpp fatx.hpp config.h Makefile.am
 @xbe_TRUE@fsck_CPPFLAGS = $(AM_CPPFLAGS) $(XBOXCPPFLAGS) -D XBOX_FSCK
-@xbe_TRUE@fsck_LDFLAGS = $(XBOXLDFLAGS) -pthread
+@xbe_TRUE@fsck_LDFLAGS = $(XBOXLDFLAGS)
 @xbe_TRUE@fsck_LDADD = $(XBOXLDADD)
 @xbe_TRUE@fsck_LINK = $(MINGW32CPP) -o $@ $(XBOXLDFLAGS)
 @xbe_TRUE@unrm_SOURCES = unrm.cpp fatx.cpp fatx.hpp config.h Makefile.am
@@ -650,9 +650,9 @@ fatx_CPPFLAGS = $(AM_CPPFLAGS) $(am__append_2) -D NO_SPLICE
 CXBE = cxbe
 SUFFIXES = .xbe
 TESTS = test1 $(am__append_3) test23 test0
-CLEANFILES = *~ *.log debian/*.log test[0-9]* $(EXTRA_PROGRAMS) \
-	disk.fatx *fatx name.txt fuse[0-9]* tbff* FILE* fsck$(EXEEXT) \
-	unrm$(EXEEXT)
+CLEANFILES = *~ *.log debian/*.log test[0-9]* unrm.cpp fsck.cpp \
+	$(EXTRA_PROGRAMS) disk.fatx *fatx name.txt fuse[0-9]* tbff* \
+	FILE* fsck$(EXEEXT) unrm$(EXEEXT)
 DISTCLEANFILES = config.h config.cache config.log config.status \
 	stamp-h1 compile missing
 MAINTAINERCLEANFILES = analyse.sh profile.sh fsck.xbe unrm.xbe \

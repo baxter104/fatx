@@ -110,7 +110,7 @@ maintainer-clean-local:
 	-$(RM) -r debian/fatx debian/patches doc autom4te.cache .deps .pc $(PACKAGE_NAME)-$(PACKAGE_VERSION)
 
 CLEANFILES =
-CLEANFILES += *~ *.log debian/*.log test[0-9]* $(EXTRA_PROGRAMS) disk.fatx *fatx name.txt fuse[0-9]* tbff* FILE* fsck$(EXEEXT) unrm$(EXEEXT)
+CLEANFILES += *~ *.log debian/*.log test[0-9]* unrm.cpp fsck.cpp $(EXTRA_PROGRAMS) disk.fatx *fatx name.txt fuse[0-9]* tbff* FILE* fsck$(EXEEXT) unrm$(EXEEXT)
 DISTCLEANFILES =
 DISTCLEANFILES += config.h config.cache config.log config.status stamp-h1 compile missing
 MAINTAINERCLEANFILES =
