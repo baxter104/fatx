@@ -1,0 +1,2 @@
+shlibs:Depends=libboost-program-options1.55.0, libc6 (>= 2.14), libfuse2 (>= 2.8.1), libgcc1 (>= 1:4.1.1), libstdc++6 (>= 4.9)
+misc:Depends=

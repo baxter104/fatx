@@ -1,0 +1,148 @@
+.\" -*- nroff -*-
+.\" Copyright 2013, 2014 by Christophe Duverger.  All Rights Reserved.
+.\" This file may be copied under the terms of the GNU Public License.
+.\" 
+.TH FSCK.FATX 8 "January  2014"
+.SH NAME
+fsck.fatx \- check an Xbox fatx file system
+.SH SYNOPSIS
+.B fsck.fatx
+[
+.B \-afntvy
+]
+[
+.B \-\-offset
+.I offset
+]
+[
+.B \-\-size
+.I size
+]
+[
+.B \-p | \-\-partition sc|gc|cp|x1|x2
+]
+[
+.B \-i | \-\-input
+]
+.I device
+.SH DESCRIPTION
+.B fsck.fatx
+checks the fatx file system.
+.PP
+.I device
+is the device file where the file system is stored (e.g. /dev/hdXX).
+.PP
+Note that in general it is not safe to run
+.B fsck.fatx
+on mounted file systems. The only exception is if the
+.B \-t
+option is specified. However, even if it is safe to do so, the results printed by
+.B fsck.fatx
+are not valid if the file system is mounted.
+.SH OPTIONS
+.TP
+.B \-a, \-\-auto
+Automatically repair the file system without any questions.
+.TP
+.B \-f, \-\-nofat
+Disable file allocation table sanity check.
+.TP
+.B \-h, \-\-help
+Print summary of options and exit.
+.TP
+.B \-i, \-\-input device
+Set the
+.I device
+file to be checked.
+.TP
+.B \-n, \-\-none
+Assume an answer of ``no'' to all questions. Allows 
+.B fsck.fatx
+to be used non-interactively.
+.TP
+.B \-p, \-\-partition sc|gc|cp|x1|x2
+Choose the partition to be checked, depending on the device. By default, xbox 2 partition is selected.
+.br
+.B sc
+\	to select system cache partition
+.br
+.B gc
+\	to select game cache partition
+.br
+.B cp
+\	to select content cache partition
+.br
+.B x1
+\	to select xbox 1 partition
+.br
+.B x2
+\	to select xbox 2 partition
+.TP
+.B \-t, \-\-test
+Open the file system read-only.
+.TP
+.B \-v, \-\-verbose
+Verbose mode.
+.TP
+.B \-y, \-\-all
+Assume an answer of ``yes'' to all questions. Allows 
+.B fsck.fatx
+to be used non-interactively.
+.TP
+.B \-\-offset offset
+Force
+.I offset
+of the partition to be checked in the device. This option disables the identification of partition mapping of the device.
+.TP
+.B \-\-size size
+Force
+.I size
+of the partition to be checked in the device. This option disables the identification of partition mapping of the device.
+.TP
+.B --version
+Print version information and exit.
+.SH EXIT CODE
+The exit code returned by
+.B fsck.fatx
+is the sum of the following conditions:
+.br
+0\	no error
+.br
+1\	file system errors corrected
+.br
+4\	file system errors left uncorrected
+.br
+8\	operational error
+.br
+16\	usage or syntax error
+.SH REPORTING BUGS
+If you manage to find a file system which causes 
+.B fsck.fatx
+to crash, or which
+.B fsck.fatx
+is unable to repair, please report it to the author.
+.PP
+Please include as much information as possible in your bug report.
+Ideally, include a complete transcript of the
+.B fsck.fatx
+run, so I can see exactly what error messages are displayed.  If you
+have a writeable file system where the transcript can be stored, the 
+.BR script (1)
+program is a handy way to save the output of
+.B fsck.fatx
+to a file.
+.PP
+Always include the full version string which 
+.B fsck.fatx
+displays when it is run with
+.B \-\-version
+option, so I know which version you are running.
+.SH AUTHOR
+This version of
+.B fsck.fatx
+is written by Christophe DUVERGER <baxter@about.org>.
+.SH SEE ALSO
+.BR mkfs.fatx (8),
+.BR label.fatx (8),
+.BR unrm.fatx (8),
+.BR fusefatx (8)

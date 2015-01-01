@@ -1,0 +1,6 @@
+debian/mkfs.fatx.8
+debian/label.fatx.8
+debian/fsck.fatx.8
+debian/unrm.fatx.8
+debian/fusefatx.8
+debian/fatx.8

@@ -1,0 +1,21 @@
+#!/bin/bash
+
+DIR=`basename \`pwd\``
+PKG=`echo $DIR | sed -e 's/-/_/'`
+ARC=`dpkg --print-architecture`
+read -p "Will build package $PKG. Are you sure? " -n 1 -r
+[[ $REPLY =~ ^[Yy]$ ]] || { echo; exit; }
+echo
+grep -q "`echo $PKG | sed -e 's/_/ (/g'`" ./debian/changelog || dch
+[ -e ./Makefile ] || ( [ -e ./configure ] || ./autogen.sh; ./configure)
+make maintainer-clean
+[ -e ./.prebuild ] && . ./.prebuild
+./autogen.sh && ./configure
+rm ../$PKG.orig.tar.gz ../$PKG_source.build ../$PKG.dsc
+make dist && mv $DIR.tar.gz ../$PKG.orig.tar.gz
+./debian/rules clean
+./debian/rules build-arch && fakeroot ./debian/rules binary-arch && debuild -us -uc -sa --lintian-opts -i --profile debian
+dpkg -f ../$PKG-1_$ARC.deb
+dpkg -c ../$PKG-1_$ARC.deb
+lintian -Iv ../$PKG-1_$ARC.deb
+#lintian -Iv ../$PKG*.dsc

@@ -1,0 +1,20 @@
+Source: fatx
+Section: utils
+Priority: extra
+Maintainer: Christophe DUVERGER <baxter@about.org>
+Build-Depends: debhelper (>= 8.0.0), autoconf (>=2.69), automake (>=1.13.3), libtool (>=2.4.2), libfuse-dev (>= 2.6.0), libboost-program-options-dev (>=1.55.0), libboost-dev (>=1.55.0)
+Standards-Version: 3.9.5
+Homepage: http://sourceforge.net/projects/fatx
+#Vcs-Git: git://git.debian.org/collab-maint/fatx.git
+#Vcs-Browser: http://git.debian.org/?p=collab-maint/fatx.git;a=summary
+
+Package: fatx
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Complete FATX filesystem support
+ Includes:
+ mkfs.fatx: make filesystem,
+ fsck.fatx: check and correct filesystem,
+ label.fatx: change or display volume name,
+ unrm.fatx: undelete files,
+ fusefatx: filesystem mounting using fuse

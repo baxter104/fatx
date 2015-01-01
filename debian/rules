@@ -1,0 +1,12 @@
+#!/usr/bin/make -f
+
+#  build-arch, build-indep, build, clean, install-indep, install-arch, install, binary-arch, binary-indep, binary
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+%:
+	dh $@ --with-autoreconf
+
+#override_dh_auto_configure:
+#	dh_auto_configure -- --enable-dbg

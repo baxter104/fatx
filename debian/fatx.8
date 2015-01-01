@@ -1,0 +1,43 @@
+.\" -*- nroff -*-
+.\" Copyright 2013, 2014 by Christophe Duverger.  All Rights Reserved.
+.\" This file may be copied under the terms of the GNU Public License.
+.\" 
+.TH FATX 8 "January  2014"
+.SH NAME
+fatx \- complete set of commands to manage Xbox fatx file system
+.SH DESCRIPTION
+.B
+fatx
+includes the following commands. Please take a look at each manpage:
+.RS
+.br
+\-
+.B mkfs.fatx
+creates a fatx file system.
+.br
+\-
+.B label.fatx
+prints or changes the name of a fatx file system.
+.br
+\-
+.B fsck.fatx
+checks the fatx file system.
+.br
+\-
+.B unrm.fatx
+tries to recover deleted files on a fatx file system.
+.br
+\-
+.B fusefatx
+mounts a fatx file system.
+.RE
+.SH AUTHOR
+This version of
+.B fatx
+is written by Christophe DUVERGER <baxter@about.org>.
+.SH SEE ALSO
+.BR mkfs.fatx (8),
+.BR label.fatx (8),
+.BR fsck.fatx (8),
+.BR unrm.fatx (8),
+.BR fusefatx (8)
