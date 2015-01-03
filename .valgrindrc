@@ -1,0 +1,12 @@
+--suppressions=./.valgrind.supp
+--memcheck:leak-check=full
+--memcheck:leak-check-heuristics=all
+--memcheck:show-leak-kinds=all
+--memcheck:track-origins=yes
+--helgrind:free-is-write=no
+--helgrind:track-lockorders=yes
+--helgrind:history-level=full
+--drd:check-stack-var=no
+--drd:first-race-only=yes
+--drd:free-is-write=no
+--drd:report-signal-unlocked=yes

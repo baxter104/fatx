@@ -1,0 +1,7 @@
+#!/bin/bash
+
+sed -i "\
+	s/^fatx_CPPFLAGS += -D DBG/#fatx_CPPFLAGS += -D DBG/g;\
+	s/^fatx_CPPFLAGS += -D NO_/#fatx_CPPFLAGS += -D NO_/g;\
+	s/^\#fatx_CPPFLAGS += -D NO_SPLICE/fatx_CPPFLAGS += -D NO_SPLICE/g;\
+" ./Makefile.am
