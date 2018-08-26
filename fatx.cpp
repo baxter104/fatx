@@ -65,7 +65,7 @@ typename read_cache<key_t, value_t>::value_type	read_cache<key_t, value_t>::	ope
 			}
 			if(container.size() + vv.size() > capacity) {
 				typename container_type::right_iterator b = container.right.begin();
-				advance(b, container.size() + vv.size() - capacity);
+				std::advance(b, container.size() + vv.size() - capacity);
 				#if defined DEBUG && defined DBG_CACHE
 					dbglog((format("Xx. fatbuf: reduce (%d)\n") % container.size()).str())
 				#endif
